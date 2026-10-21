@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import QuestionCard from '../components/QuestionCard'
-import questions from '../data/questions'
+import { Link } from 'react-router-dom'
 
-function QuestionListPage() {
+function QuestionListPage({ questions }) {
     const [sharkOnly, setSharkOnly] = useState(false)
     const [search, setSearch] = useState("")
 
@@ -27,6 +27,10 @@ function QuestionListPage() {
 
             <section className="questions-section">
                 <h2>질문 모아보기</h2>
+
+                <Link to="/questions/new" className="new-question-button">
+                    + 질문 등록
+                </Link>
 
                 <label>
                     질문 검색

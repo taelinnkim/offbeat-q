@@ -1,7 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
-import questions from '../data/questions'
 
-function QuestionDetailPage() {
+function QuestionDetailPage({ questions }) {
     const { id } = useParams()
 
     const question = questions.find(

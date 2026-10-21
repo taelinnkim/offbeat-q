@@ -1,5 +1,8 @@
 import './App.css'
 
+import { useState } from 'react'
+import initialQuestions from './data/questions'
+
 import {
   BrowserRouter,
   Routes,
@@ -9,8 +12,10 @@ import {
 
 import QuestionListPage from './pages/QuestionListPage'
 import QuestionDetailPage from './pages/QuestionDetailPage'
+import QuestionNewPage from './pages/QuestionNewPage'
 
 function App() {
+  const [questions, setQuestions] = useState(initialQuestions)
   return (
     <BrowserRouter>
       <Routes>
@@ -21,12 +26,17 @@ function App() {
 
         <Route
           path="/questions"
-          element={<QuestionListPage />}
+          element={<QuestionListPage questions={questions} />}
+        />
+
+        <Route
+          path="/questions/new"
+          element={<QuestionNewPage setQuestions={setQuestions} />}
         />
 
         <Route
           path="/questions/:id"
-          element={<QuestionDetailPage />}
+          element={<QuestionDetailPage questions={questions} />}
         />
 
         <Route
