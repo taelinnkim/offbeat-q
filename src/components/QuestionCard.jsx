@@ -1,8 +1,14 @@
-function QuestionCard({ title, category }) {
+import { Link } from 'react-router-dom'
+
+function QuestionCard({ id, title, category }) {
   return (
     <article className="question-card">
       <span>{category}</span>
-      <h3>{title}</h3>
+      <h3>
+        <Link to={`/questions/${id}`}>
+          {title}
+        </Link>
+      </h3>
     </article>
   )
 }
