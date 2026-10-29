@@ -28,7 +28,8 @@
   font-weight: 600;
 }
 
-.questions-section input {
+.questions-section input,
+.questions-section select {
   display: block;
   width: 100%;
   margin-top: 8px;
@@ -37,6 +38,11 @@
   border-radius: 10px;
   background: white;
   color: #172b4d;
+  font: inherit;
+}
+
+.category-filter {
+  margin-top: 16px;
 }
 
 .questions-section button {
@@ -54,6 +60,7 @@
 }
 
 .questions-section input:focus-visible,
+.questions-section select:focus-visible,
 .questions-section button:focus-visible {
   outline: 3px solid #e96b27;
   outline-offset: 3px;

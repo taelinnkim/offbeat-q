@@ -13,7 +13,7 @@
 
 | 경로 | 기능 |
 | --- | --- |
-| `/questions` | 원격 질문 목록, 검색, 상어 질문 필터 |
+| `/questions` | 원격 질문 목록, 검색, 분류별 필터(전체 포함) |
 | `/questions/new` | 질문 등록, 필수값 검증 |
 | `/questions/:id` | id로 질문 조회, 삭제 전 확인 |
 | `/questions/:id/edit` | 원격 조회 후 기존 값 표시, 질문 수정 |
@@ -126,7 +126,8 @@ supabase/
 - 조회 결과와 로딩·에러 상태는 조회 훅, 저장·삭제 상태는 변경 훅에 둡니다.
 - 페이지는 조회한 데이터와 콜백을 props로 UI 컴포넌트에 전달합니다.
 - 조회 훅의 `useEffect`는 질문 id 또는 재시도 번호가 바뀔 때 요청하고, 정리 함수에서 이전 요청을 취소합니다.
-- 검색 입력 → `search` 변경 → 카드와 개수 변경, 필터 클릭 → `sharkOnly` 변경 → 목록 변경,
+- 조회한 질문의 `category`에서 중복을 제거해 분류 선택지를 만들고 검색 조건과 함께 적용합니다.
+- 검색 입력 → `search` 변경 → 카드와 개수 변경, 분류 선택 → `selectedCategory` 변경 → 목록 변경,
   제출 → 검증 오류 또는 `pending` 변경 → 오류 안내 또는 버튼 비활성화로 이어집니다.
 
 재사용 UI는 `QuestionCard`, `QuestionForm`, `QuestionState`, `QuestionActions`,

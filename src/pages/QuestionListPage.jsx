@@ -1,4 +1,3 @@
-import Button from '../components/Button'
 import FormField from '../components/FormField'
 import PageHeader from '../components/PageHeader'
 import { useState } from 'react'
@@ -9,17 +8,22 @@ import QuestionState from '../components/QuestionState'
 
 function QuestionListPage() {
     const { questions, loading, error, retry } = useQuestions()
-    const [sharkOnly, setSharkOnly] = useState(false)
+    const [selectedCategory, setSelectedCategory] = useState('')
     const [search, setSearch] = useState("")
 
+    const categories = [...new Set(
+        questions.map((question) => question.category)
+            .filter((category) => typeof category === 'string' && category.trim() !== '')
+    )]
+
     const visibleQuestions = questions.filter((question) => {
-        const matchesShark =
-            !sharkOnly || (question.title ?? '').includes("상어")
+        const matchesCategory =
+            selectedCategory === '' || question.category === selectedCategory
 
         const matchesSearch =
             (question.title ?? '').includes(search.trim())
 
-        return matchesShark && matchesSearch
+        return matchesCategory && matchesSearch
     })
 
     return (
@@ -48,9 +52,19 @@ function QuestionListPage() {
                             onChange={(event) => setSearch(event.target.value)}
                         />
 
-                        <Button onClick={() => setSharkOnly((previous) => !previous)}>
-                            {sharkOnly ? "전체 질문 보기" : "상어 질문만 보기"}
-                        </Button>
+                        <div className="category-filter">
+                            <label htmlFor="question-category">분류별 보기</label>
+                            <select
+                                id="question-category"
+                                value={selectedCategory}
+                                onChange={(event) => setSelectedCategory(event.target.value)}
+                            >
+                                <option value="">전체</option>
+                                {categories.map((category) => (
+                                    <option key={category} value={category}>{category}</option>
+                                ))}
+                            </select>
+                        </div>
 
                         <p className="question-count">질문 {visibleQuestions.length}개</p>
 
