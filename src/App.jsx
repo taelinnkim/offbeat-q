@@ -13,6 +13,7 @@ import {
 import QuestionListPage from './pages/QuestionListPage'
 import QuestionDetailPage from './pages/QuestionDetailPage'
 import QuestionNewPage from './pages/QuestionNewPage'
+import QuestionEditPage from './pages/QuestionEditPage'
 
 function App() {
   const [questions, setQuestions] = useState(initialQuestions)
@@ -35,8 +36,23 @@ function App() {
         />
 
         <Route
+          path="/questions/:id/edit"
+          element={
+            <QuestionEditPage
+              questions={questions}
+              setQuestions={setQuestions}
+            />
+          }
+        />
+
+        <Route
           path="/questions/:id"
-          element={<QuestionDetailPage questions={questions} />}
+          element={
+            <QuestionDetailPage
+              questions={questions}
+              setQuestions={setQuestions}
+            />
+          }
         />
 
         <Route
