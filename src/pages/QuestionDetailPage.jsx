@@ -1,58 +1,35 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { useQuestion } from '../hooks/useQuestions'
+import QuestionState from '../components/QuestionState'
+import QuestionActions from '../components/QuestionActions'
 
-function QuestionDetailPage({ questions, setQuestions }) {
+function QuestionDetailPage() {
     const { id } = useParams()
-    const navigate = useNavigate()
-
-    const question = questions.find(
-        (question) => String(question.id) === id
-    )
-
-    function handleDelete() {
-        const confirmed = window.confirm('이 질문을 삭제할까요?')
-
-        if (!confirmed) {
-            return
-        }
-
-        setQuestions((previous) =>
-            previous.filter((question) => String(question.id) !== id)
-        )
-
-        navigate('/questions')
-    }
-
-    if (!question) {
-        return (
-            <main className="app">
-                <h1>질문을 찾을 수 없어요.</h1>
-                <Link to="/questions">목록으로 돌아가기</Link>
-            </main>
-        )
-    }
+    const { question, loading, error, retry } = useQuestion(id)
 
     return (
         <main className="app">
             <Link to="/questions">← 목록으로 돌아가기</Link>
 
-            <article className="question-card">
-                <span>{question.category}</span>
-                <h1>{question.title}</h1>
-                <p>영상과 참고 자료가 들어갈 상세 페이지입니다.</p>
+            {loading ? (
+                <QuestionState kind="loading" title="질문을 불러오는 중이에요." />
+            ) : error ? (
+                <QuestionState kind="error" title="질문을 불러올 수 없어요." onRetry={retry}>
+                    {error}
+                </QuestionState>
+            ) : !question ? (
+                <QuestionState title="질문을 찾을 수 없어요.">
+                    질문이 삭제되었거나 주소가 올바르지 않을 수 있어요.
+                </QuestionState>
+            ) : (
+                <article className="question-card">
+                    <span>{question.category}</span>
+                    <h1>{question.title}</h1>
+                    <p>영상과 참고 자료가 들어갈 상세 페이지입니다.</p>
 
-                <div className="question-actions">
-                    <Link to={`/questions/${id}/edit`} className="question-action">
-                        질문 수정
-                    </Link>
-                    <button
-                        type="button"
-                        className="question-action question-action-delete"
-                        onClick={handleDelete}
-                    >
-                        질문 삭제
-                    </button>
-                </div>
-            </article>
+                    <QuestionActions key={question.id} id={question.id} />
+                </article>
+            )}
         </main>
     )
 }

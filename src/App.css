@@ -210,3 +210,48 @@
   outline: 3px solid #e98535;
   outline-offset: 3px;
 }
+
+.question-state {
+  margin-top: 24px;
+}
+
+.question-state h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+
+.question-state p {
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.question-state-error {
+  border-color: #b42318;
+}
+
+.questions-section .new-question-button {
+  margin: 8px 0 12px;
+}
+
+.questions-section button:disabled,
+.question-action:disabled {
+  background: #e1e6ee;
+  color: #59677c;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.question-form button:disabled,
+.question-form input:disabled {
+  background: #e1e6ee;
+  color: #59677c;
+  cursor: not-allowed;
+}
+
+.question-form input[aria-invalid="true"] {
+  border-color: #b42318;
+}
+
+.question-form .question-state {
+  margin-bottom: 24px;
+}
