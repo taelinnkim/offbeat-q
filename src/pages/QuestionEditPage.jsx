@@ -1,4 +1,5 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import PageHeader from '../components/PageHeader'
+import { useNavigate, useParams } from 'react-router-dom'
 import QuestionForm from '../components/QuestionForm'
 import QuestionState from '../components/QuestionState'
 import { useQuestion } from '../hooks/useQuestions'
@@ -10,9 +11,8 @@ function QuestionEditPage() {
     const { question, loading, error, retry } = useQuestion(id)
 
     return (
-        <main className="app">
-            <Link to={`/questions/${id}`}>← 상세로 돌아가기</Link>
-            <h1>질문 수정</h1>
+        <>
+            <PageHeader title="질문 수정" backTo={`/questions/${id}`} backLabel="← 상세로 돌아가기" />
             {loading ? (
                 <QuestionState kind="loading" title="질문을 불러오는 중이에요." />
             ) : error ? (
@@ -26,7 +26,7 @@ function QuestionEditPage() {
             ) : (
                 <QuestionEditor key={question.id} question={question} />
             )}
-        </main>
+        </>
     )
 }
 

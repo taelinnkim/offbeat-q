@@ -1,3 +1,6 @@
+import Button from '../components/Button'
+import FormField from '../components/FormField'
+import PageHeader from '../components/PageHeader'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import QuestionCard from '../components/QuestionCard'
@@ -20,13 +23,12 @@ function QuestionListPage() {
     })
 
     return (
-        <main className="app">
-            <h1>딴질문</h1>
-            <h2>엉뚱한 질문, 뜻밖의 과학.</h2>
-            <p>
-                엉뚱한 질문을 따라 과학을 탐험하고,
-                익숙한 세계를 새롭게 바라봅니다.
-            </p>
+        <>
+            <PageHeader
+                title="딴질문"
+                subtitle="엉뚱한 질문, 뜻밖의 과학."
+                description="엉뚱한 질문을 따라 과학을 탐험하고, 익숙한 세계를 새롭게 바라봅니다."
+            />
 
             <section className="questions-section">
                 <h2>질문 모아보기</h2>
@@ -37,19 +39,18 @@ function QuestionListPage() {
 
                 {!loading && !error && (
                     <>
-                        <label>
-                            질문 검색
-                            <input
-                                type="search"
-                                placeholder="검색어를 입력하세요"
-                                value={search}
-                                onChange={(event) => setSearch(event.target.value)}
-                            />
-                        </label>
+                        <FormField
+                            id="question-search"
+                            label="질문 검색"
+                            type="search"
+                            placeholder="검색어를 입력하세요"
+                            value={search}
+                            onChange={(event) => setSearch(event.target.value)}
+                        />
 
-                        <button onClick={() => setSharkOnly((previous) => !previous)}>
+                        <Button onClick={() => setSharkOnly((previous) => !previous)}>
                             {sharkOnly ? "전체 질문 보기" : "상어 질문만 보기"}
-                        </button>
+                        </Button>
 
                         <p className="question-count">질문 {visibleQuestions.length}개</p>
 
@@ -76,7 +77,7 @@ function QuestionListPage() {
                     </QuestionState>
                 )}
             </section>
-        </main>
+        </>
     )
 }
 

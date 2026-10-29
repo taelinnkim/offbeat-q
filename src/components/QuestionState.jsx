@@ -1,3 +1,4 @@
+import Button from './Button'
 function QuestionState({ kind = 'empty', title, children, onRetry }) {
     return (
         <section
@@ -8,9 +9,9 @@ function QuestionState({ kind = 'empty', title, children, onRetry }) {
             <h2>{title}</h2>
             {children && <p>{children}</p>}
             {onRetry && (
-                <button type="button" className="question-action" onClick={onRetry}>
+                <Button type="button" onClick={onRetry}>
                     다시 시도
-                </button>
+                </Button>
             )}
         </section>
     )

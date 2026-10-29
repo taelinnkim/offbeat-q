@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import QuestionState from './QuestionState'
+import Button from './Button'
+import FormField from './FormField'
 
 function QuestionForm({ question, onSave, pending, error, submitLabel }) {
     const [title, setTitle] = useState(question?.title ?? '')
@@ -21,38 +23,30 @@ function QuestionForm({ question, onSave, pending, error, submitLabel }) {
 
     return (
         <form className="question-form" onSubmit={handleSubmit} noValidate aria-busy={pending}>
-            <div>
-                <label htmlFor="title">질문 제목 (필수)</label>
-                <input
-                    id="title"
-                    value={title}
-                    onChange={(event) => setTitle(event.target.value)}
-                    disabled={pending}
-                    required
-                    aria-invalid={Boolean(errors.title)}
-                    aria-describedby={errors.title ? 'title-error' : undefined}
-                />
-                {errors.title && <p id="title-error" role="alert">{errors.title}</p>}
-            </div>
-            <div>
-                <label htmlFor="category">분류 (필수)</label>
-                <input
-                    id="category"
-                    value={category}
-                    onChange={(event) => setCategory(event.target.value)}
-                    disabled={pending}
-                    required
-                    aria-invalid={Boolean(errors.category)}
-                    aria-describedby={errors.category ? 'category-error' : undefined}
-                />
-                {errors.category && <p id="category-error" role="alert">{errors.category}</p>}
-            </div>
+            <FormField
+                id="title"
+                label="질문 제목 (필수)"
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+                disabled={pending}
+                required
+                error={errors.title}
+            />
+            <FormField
+                id="category"
+                label="분류 (필수)"
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+                disabled={pending}
+                required
+                error={errors.category}
+            />
             {error && (
                 <QuestionState kind="error" title="저장하지 못했어요.">{error}</QuestionState>
             )}
-            <button type="submit" disabled={pending}>
+            <Button type="submit" disabled={pending}>
                 {pending ? '저장 중…' : submitLabel}
-            </button>
+            </Button>
             {pending && <p role="status">질문을 저장하고 있어요. 잠시 기다려주세요.</p>}
         </form>
     )

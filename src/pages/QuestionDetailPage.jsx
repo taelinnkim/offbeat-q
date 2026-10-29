@@ -1,4 +1,5 @@
-import { Link, useParams } from 'react-router-dom'
+import PageHeader from '../components/PageHeader'
+import { useParams } from 'react-router-dom'
 import { useQuestion } from '../hooks/useQuestions'
 import QuestionState from '../components/QuestionState'
 import QuestionActions from '../components/QuestionActions'
@@ -8,8 +9,8 @@ function QuestionDetailPage() {
     const { question, loading, error, retry } = useQuestion(id)
 
     return (
-        <main className="app">
-            <Link to="/questions">← 목록으로 돌아가기</Link>
+        <>
+            <PageHeader title="질문 상세" backTo="/questions" />
 
             {loading ? (
                 <QuestionState kind="loading" title="질문을 불러오는 중이에요." />
@@ -24,13 +25,13 @@ function QuestionDetailPage() {
             ) : (
                 <article className="question-card">
                     <span>{question.category}</span>
-                    <h1>{question.title}</h1>
+                    <h2 className="question-title">{question.title}</h2>
                     <p>영상과 참고 자료가 들어갈 상세 페이지입니다.</p>
 
                     <QuestionActions key={question.id} id={question.id} />
                 </article>
             )}
-        </main>
+        </>
     )
 }
 

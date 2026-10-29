@@ -4,7 +4,8 @@
   padding: 64px 24px;
 }
 
-.app h1 {
+.app h1,
+.question-card .question-title {
   margin: 0 0 12px;
   color: #e96b27;
   font-size: 48px;
@@ -254,4 +255,68 @@
 
 .question-form .question-state {
   margin-bottom: 24px;
+}
+
+.site-header {
+  border-bottom: 1px solid #e1e6ee;
+  background: white;
+}
+
+.site-header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+.site-brand {
+  color: #b94e14;
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.site-nav a,
+.back-link {
+  color: #172b4d;
+  text-underline-offset: 4px;
+}
+
+.site-nav a[aria-current="page"] {
+  color: #b94e14;
+  font-weight: 700;
+}
+
+.site-header a:focus-visible,
+.back-link:focus-visible {
+  outline: 3px solid #e96b27;
+  outline-offset: 3px;
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h2 {
+  font-size: 24px;
+}
+
+.page-header p,
+.about-content p {
+  line-height: 1.8;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 16px;
 }

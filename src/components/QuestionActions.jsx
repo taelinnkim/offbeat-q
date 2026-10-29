@@ -1,3 +1,4 @@
+import Button from './Button'
 import { Link, useNavigate } from 'react-router-dom'
 import QuestionState from './QuestionState'
 import useQuestionMutation from '../hooks/useQuestionMutation'
@@ -17,18 +18,18 @@ function QuestionActions({ id }) {
         <>
             <div className="question-actions" aria-busy={pending}>
                 {pending ? (
-                    <button type="button" className="question-action" disabled>질문 수정</button>
+                    <Button type="button" disabled>질문 수정</Button>
                 ) : (
                     <Link to={`/questions/${id}/edit`} className="question-action">질문 수정</Link>
                 )}
-                <button
+                <Button
                     type="button"
-                    className="question-action question-action-delete"
+                    className="question-action-delete"
                     disabled={pending}
                     onClick={handleDelete}
                 >
                     {pending ? '삭제 중…' : '질문 삭제'}
-                </button>
+                </Button>
             </div>
             {pending && <p role="status">질문을 삭제하고 있어요. 잠시 기다려주세요.</p>}
             {error && (

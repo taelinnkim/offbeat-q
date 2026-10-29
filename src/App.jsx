@@ -11,41 +11,45 @@ import QuestionListPage from './pages/QuestionListPage'
 import QuestionDetailPage from './pages/QuestionDetailPage'
 import QuestionNewPage from './pages/QuestionNewPage'
 import QuestionEditPage from './pages/QuestionEditPage'
+import AboutPage from './pages/AboutPage'
+import NotFoundPage from './pages/NotFoundPage'
+import AppLayout from './components/AppLayout'
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<Navigate to="/questions" replace />}
-        />
+      <AppLayout>
+        <Routes>
+          <Route
+            path="/"
+            element={<Navigate to="/questions" replace />}
+          />
 
-        <Route
-          path="/questions"
-          element={<QuestionListPage />}
-        />
+          <Route
+            path="/questions"
+            element={<QuestionListPage />}
+          />
 
-        <Route
-          path="/questions/new"
-          element={<QuestionNewPage />}
-        />
+          <Route
+            path="/questions/new"
+            element={<QuestionNewPage />}
+          />
 
-        <Route
-          path="/questions/:id/edit"
-          element={<QuestionEditPage />}
-        />
+          <Route
+            path="/questions/:id/edit"
+            element={<QuestionEditPage />}
+          />
 
-        <Route
-          path="/questions/:id"
-          element={<QuestionDetailPage />}
-        />
+          <Route
+            path="/questions/:id"
+            element={<QuestionDetailPage />}
+          />
 
-        <Route
-          path="*"
-          element={<p>페이지를 찾을 수 없어요.</p>}
-        />
-      </Routes>
+          <Route path="/about" element={<AboutPage />} />
+
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </AppLayout>
     </BrowserRouter>
   )
 }

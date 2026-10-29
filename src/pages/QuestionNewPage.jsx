@@ -1,4 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom'
+import PageHeader from '../components/PageHeader'
+import { useNavigate } from 'react-router-dom'
 import QuestionForm from '../components/QuestionForm'
 import QuestionState from '../components/QuestionState'
 import useQuestionMutation from '../hooks/useQuestionMutation'
@@ -15,9 +16,8 @@ function QuestionNewPage() {
     }
 
     return (
-        <main className="app">
-            <Link to="/questions">← 목록으로 돌아가기</Link>
-            <h1>질문 등록</h1>
+        <>
+            <PageHeader title="질문 등록" backTo="/questions" />
             {supabaseConfigError ? (
                 <QuestionState kind="error" title="Supabase 설정을 확인해주세요.">
                     {supabaseConfigError}
@@ -25,7 +25,7 @@ function QuestionNewPage() {
             ) : (
                 <QuestionForm onSave={handleSave} pending={pending} error={error} submitLabel="등록하기" />
             )}
-        </main>
+        </>
     )
 }
 
